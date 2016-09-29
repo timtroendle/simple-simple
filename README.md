@@ -40,3 +40,17 @@ Compared to the ISO 13790 there is
 * &theta;<sub>int, H, set</sub>: heating set point temperature [℃]
 * &Phi;<sub>C, max</sub>: maximum cooling power [W]
 * &Phi;<sub>H, max</sub>: maximum heating power [W]
+
+## Developer Guide
+
+### Installation
+
+Best install simplesimple in editable mode:
+
+    $ pip install -e .
+
+### Run the test suite
+
+Run the test suite with py.test:
+
+    $ py.test
