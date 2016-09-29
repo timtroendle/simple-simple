@@ -31,6 +31,34 @@ def fully_damped_building():
         conditioned_floor_area=conditioned_floor_area)
 
 
+def test_maximum_heating_power_cannot_be_negative():
+    with pytest.raises(ValueError):
+        conditioned_floor_area = 100
+        Building(
+            heat_mass_capacity=165000 * conditioned_floor_area,
+            heat_transmission=200,
+            maximum_cooling_power=float("-inf"),
+            maximum_heating_power=-0.01,
+            initial_building_temperature=22,
+            time_step_size=timedelta(hours=1),
+            conditioned_floor_area=conditioned_floor_area
+        )
+
+
+def test_maximum_cooling_power_cannot_be_positive():
+    with pytest.raises(ValueError):
+        conditioned_floor_area = 100
+        Building(
+            heat_mass_capacity=165000 * conditioned_floor_area,
+            heat_transmission=200,
+            maximum_cooling_power=0.01,
+            maximum_heating_power=float("inf"),
+            initial_building_temperature=22,
+            time_step_size=timedelta(hours=1),
+            conditioned_floor_area=conditioned_floor_area
+        )
+
+
 def test_building_temperature_remains_constant_when_same_temperature_outside(building):
     building.step(outside_temperature=22, heating_setpoint=21.9, cooling_setpoint=26)
     assert building.current_temperature == 22
