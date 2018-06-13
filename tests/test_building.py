@@ -100,6 +100,7 @@ def test_building_gets_cooled_with_max_power_when_too_warm(fully_damped_building
     fully_damped_building.step(outside_temperature=22, heating_setpoint=18, cooling_setpoint=21)
     assert fully_damped_building.current_temperature == 21
 
+
 def test_building_does_not_exceed_max_cooling_power(fully_damped_building):
     fully_damped_building.step(outside_temperature=22, heating_setpoint=18, cooling_setpoint=20)
     assert fully_damped_building.current_temperature == 21
