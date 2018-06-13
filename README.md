@@ -41,6 +41,44 @@ Compared to the ISO 13790 there is
 * &Phi;<sub>C, max</sub>: maximum cooling power [W]
 * &Phi;<sub>H, max</sub>: maximum heating power [W]
 
+## User Guide
+
+### Installation
+
+You need Python 3.6 and pip installed.
+
+Install from GitHub (needs Git):
+
+    $ pip install git+git://github.com/timtroendle/simple-simple
+
+If you don't have Git installed, download and extract the repository and then execute:
+
+    $ cd <simple-simple-directory>
+    $ pip install -e .
+
+### Usage Example
+
+```Python
+from datetime import timedelta
+from simplesimple import Building
+
+conditioned_floor_area = 100
+building = Building(
+    heat_mass_capacity=165000 * conditioned_floor_area,
+    heat_transmission=200,
+    maximum_cooling_power=-10000,
+    maximum_heating_power=10000,
+    initial_building_temperature=16,
+    time_step_size=timedelta(minutes=10),
+    conditioned_floor_area=conditioned_floor_area
+)
+
+# simulate one time step
+print(building.current_temperature) # returns 16
+building.step(outside_temperature=20, heating_setpoint=18, cooling_setpoint=26)
+print(building.current_temperature) # returns ~16.4
+```
+
 ## Developer Guide
 
 ### Installation
