@@ -75,8 +75,10 @@ building = Building(
 
 # simulate one time step
 print(building.current_temperature) # returns 16
+print(building.thermal_power) # returns 0
 building.step(outside_temperature=20, heating_setpoint=18, cooling_setpoint=26)
 print(building.current_temperature) # returns ~16.4
+print(building.thermal_power) # returns 10000
 ```
 
 ## Developer Guide

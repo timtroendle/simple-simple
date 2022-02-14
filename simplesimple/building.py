@@ -27,6 +27,7 @@ class Building():
         self.__maximum_cooling_power = maximum_cooling_power
         self.__maximum_heating_power = maximum_heating_power
         self.current_temperature = initial_building_temperature
+        self.thermal_power = 0
         self.__time_step_size = time_step_size
         self.__conditioned_floor_area = conditioned_floor_area
 
@@ -62,10 +63,10 @@ class Building():
                                   (setpoint - next_temperature_no_power) /
                                   (next_temperature_power_10 - next_temperature_no_power))
             if abs(unrestricted_power) <= abs(max_power):
-                power = unrestricted_power
+                self.thermal_power = unrestricted_power
             else:
-                power = max_power
-            next_temperature_heating_cooling = next_temperature(power)
+                self.thermal_power = max_power
+            next_temperature_heating_cooling = next_temperature(self.thermal_power)
             self.current_temperature = next_temperature_heating_cooling
 
     def _next_temperature(self, outside_temperature, heating_setpoint, cooling_setpoint,
